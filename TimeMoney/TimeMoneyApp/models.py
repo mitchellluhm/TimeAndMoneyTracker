@@ -1,10 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
-class User(models.Model):
+class UserProfileInfo(models.Model):
 
-    name = models.CharField(max_length=128)
+    user = models.OneToOneField(User, on_delete=models.DO_NOTHING)
     email = models.EmailField(max_length=254, unique=True)
     total_events = models.IntegerField(default=0)
     total_expenses = models.IntegerField(default=0)

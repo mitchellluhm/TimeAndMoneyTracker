@@ -1,6 +1,6 @@
 from django.contrib import admin
-from TimeMoneyApp.models import User, TimeEvent
+from TimeMoneyApp.models import UserProfileInfo, TimeEvent
 
 # Register your models here.
-admin.site.register(User)
+admin.site.register(UserProfileInfo)
 #admin.site.register(TimeEvent)

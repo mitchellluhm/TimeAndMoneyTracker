@@ -8,7 +8,8 @@
  	<h1>Sign Up Now</h1>
 
 	<form method="POST">
-		{{ form.as_p }}
+		{{ user_form.as_p }}
+		{{ profile_form.as_p }}
 		{% csrf_token %}
 		<input type="submit" value="Submit">
 	</form>
