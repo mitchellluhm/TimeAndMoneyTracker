@@ -18,6 +18,12 @@ class UserProfileInfoForm(forms.ModelForm):
         
 class TimeEventForm(forms.ModelForm):
 
+    '''
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(TimeEventForm, self).__init__(*args, **kwargs)
+        '''
+
     class Meta():
         model = TimeEvent
-        fields = '__all__'
+        fields = ('event_name', 'event_type')

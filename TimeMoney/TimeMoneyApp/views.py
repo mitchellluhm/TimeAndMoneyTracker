@@ -75,7 +75,10 @@ def time_event(request):
     if request.method == 'POST':
         form = TimeEventForm(request.POST)
         if form.is_valid():
-            form.save(commit=True)
+            form_save = form.save(commit=False)
+            form_save.user = request.user
+            #form.save(commit=True)
+            form_save.save()
             return index(request)
         else:
             print("Some Form Error in time_event")
