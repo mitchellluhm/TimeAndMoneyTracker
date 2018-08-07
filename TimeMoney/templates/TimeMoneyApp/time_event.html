@@ -1,0 +1,19 @@
+{% extends 'TimeMoneyApp/base.html' %}
+{% block login_block %}
+<h1>Manage Events Here</h1>
+<!-- Check to make sure user is logged in -->
+
+
+<!-- List their active (non-ended) events -->
+
+<!-- Have option to close out one of these -->
+	<form method="POST">
+		{{ form.as_p }}
+		{% csrf_token %}
+		<input type="submit" value="Submit">
+	</form>
+
+
+<!-- Start New Event -->
+
+{% endblock %}

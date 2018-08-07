@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from TimeMoneyApp.models import UserProfileInfo
+from TimeMoneyApp.models import UserProfileInfo, TimeEvent
 
 class NewUserForm(forms.ModelForm):
 
@@ -16,3 +16,8 @@ class UserProfileInfoForm(forms.ModelForm):
         model = UserProfileInfo
         fields = ()
         
+class TimeEventForm(forms.ModelForm):
+
+    class Meta():
+        model = TimeEvent
+        fields = '__all__'

@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from TimeMoneyApp.forms import NewUserForm, UserProfileInfoForm
+from TimeMoneyApp.forms import NewUserForm, UserProfileInfoForm, TimeEventForm
+from TimeMoneyApp.models import TimeEvent
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-#from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -66,3 +66,19 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+@login_required
+def time_event(request):
+    # Create context dictionary of their active events
+    form = TimeEventForm()
+
+    if request.method == 'POST':
+        form = TimeEventForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print("Some Form Error in time_event")
+
+    return render(request, 'TimeMoneyApp/time_event.html',
+                  { 'form' : form })

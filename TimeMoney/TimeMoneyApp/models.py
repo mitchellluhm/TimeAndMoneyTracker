@@ -13,7 +13,7 @@ class UserProfileInfo(models.Model):
     def __str__(self):
         return self.user.username
 
-class TimeEvent:
+class TimeEvent(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING) # TODO : add on_delete
     event_name = models.CharField(max_length=256, default="Unnamed Event")
@@ -22,7 +22,7 @@ class TimeEvent:
     event_end = models.DateTimeField(null=True)
 
     def __str__(self):
-        return self.event_name + " of type " + self.event_type
+        return "Some Time Event"
 
     # TODO : compute length of event with methods
 
