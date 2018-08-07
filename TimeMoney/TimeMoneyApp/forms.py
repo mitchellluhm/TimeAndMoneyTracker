@@ -26,4 +26,4 @@ class TimeEventForm(forms.ModelForm):
 
     class Meta():
         model = TimeEvent
-        fields = ('event_name', 'event_type')
+        fields = ('event_name', 'event_type', 'event_start')
