@@ -5,6 +5,32 @@
 
 
 <!-- List their active (non-ended) events -->
+{% if user_event_list %}
+
+<table>
+		<thead>
+				<th>Event Name</th>
+				<th>Event Type</th>
+				<th>Event Start</th>
+		</thead>
+
+		{% for user_event in user_event_list %}
+
+		<tr>
+				<td>{{ user_event.event_name }}</td>
+				<td>{{ user_event.event_type }}</td>
+				<td>{{ user_event.event_start }}</td>
+		</tr>
+
+		{% endfor %}
+
+</table>
+
+{% else %}
+
+<p>No User Events Found</p>
+
+{% endif %}
 
 <!-- Have option to close out one of these -->
 	<form method="POST">

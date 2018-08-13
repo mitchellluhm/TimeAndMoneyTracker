@@ -70,6 +70,8 @@ def user_logout(request):
 @login_required
 def time_event(request):
     # Create context dictionary of their active events
+    user_event_list = TimeEvent.objects.filter(user=request.user)
+
     form = TimeEventForm()
 
     if request.method == 'POST':
@@ -84,4 +86,6 @@ def time_event(request):
             print("Some Form Error in time_event")
 
     return render(request, 'TimeMoneyApp/time_event.html',
-                  { 'form' : form })
+                  { 'form' : form,
+                    'user_event_list' : user_event_list,
+                  })
