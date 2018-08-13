@@ -16,6 +16,7 @@
           <li><a class="navbar-brand" href="{% url 'index' %}">DJANGO</a></li>
           <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
           <li><a class="navbar-link" href="{% url 'TimeMoneyApp:user_register' %}">Register</a></li>
+          <li><a class="navbar-link" href="{% url 'TimeMoneyApp:time_event' %}">Time Event</a></li>
 
           {# Some logic on what to display for last item#}
           {% if user.is_authenticated %}
