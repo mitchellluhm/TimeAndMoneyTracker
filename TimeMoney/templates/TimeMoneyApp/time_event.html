@@ -39,6 +39,11 @@
 		<input type="submit" value="Submit">
 	</form>
 
+	<form method="POST">
+		{{ form_end.as_p }}
+		{% csrf_token %}
+		<input type="submit" value="Submit End">
+	</form>
 
 <!-- Start New Event -->
 
