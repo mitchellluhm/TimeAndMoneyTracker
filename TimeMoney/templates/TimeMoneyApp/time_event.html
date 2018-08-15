@@ -12,6 +12,7 @@
 
 <table>
 		<thead>
+				<th>Event ID</th>
 				<th>Event Name</th>
 				<th>Event Type</th>
 				<th>Event Start</th>
@@ -21,6 +22,7 @@
 		{% for user_event in user_event_list %}
 
 		<tr>
+				<td>{{ user_event.id }}</td>
 				<td>{{ user_event.event_name }}</td>
 				<td>{{ user_event.event_type }}</td>
 				<td>{{ user_event.event_start }}</td>

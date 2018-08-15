@@ -90,6 +90,11 @@ def time_event(request):
             print("Some Form Error in time_event")
 
         # Check second form
+        '''
+        Currently, it will only save to the most recent instance of a time_event
+        It will fill it in from None to something
+        Or overwrite something with the new time
+        '''
         form_end = TimeEventEndForm(request.POST, instance=last_event)
         if form_end.is_valid():
             form_save = form_end.save(commit=False)
