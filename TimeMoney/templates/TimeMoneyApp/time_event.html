@@ -1,6 +1,9 @@
 {% extends 'TimeMoneyApp/base.html' %}
+
 {% block login_block %}
+
 <h1>Manage Events Here</h1>
+
 <!-- Check to make sure user is logged in -->
 
 
@@ -12,6 +15,7 @@
 				<th>Event Name</th>
 				<th>Event Type</th>
 				<th>Event Start</th>
+				<th>Event End</th>
 		</thead>
 
 		{% for user_event in user_event_list %}
@@ -20,6 +24,7 @@
 				<td>{{ user_event.event_name }}</td>
 				<td>{{ user_event.event_type }}</td>
 				<td>{{ user_event.event_start }}</td>
+				<td>{{ user_event.event_end }}</td>
 		</tr>
 
 		{% endfor %}
@@ -33,17 +38,17 @@
 {% endif %}
 
 <!-- Have option to close out one of these -->
-	<form method="POST">
-		{{ form.as_p }}
-		{% csrf_token %}
-		<input type="submit" value="Submit">
-	</form>
+<form method="POST">
+	{{ form.as_p }}
+	{% csrf_token %}
+	<input type="submit" value="Submit">
+</form>
 
-	<form method="POST">
-		{{ form_end.as_p }}
-		{% csrf_token %}
-		<input type="submit" value="Submit End">
-	</form>
+<form method="POST">
+	{{ form_end.as_p }}
+	{% csrf_token %}
+	<input type="submit" value="Submit End">
+</form>
 
 <!-- Start New Event -->
 

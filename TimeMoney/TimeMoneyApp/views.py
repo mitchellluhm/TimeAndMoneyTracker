@@ -58,7 +58,8 @@ def user_login(request):
                 return HttpResponse("Account not active.")
         else:
             print("Someone tried to login and failed.")
-            return HttpResponse("Invalid login credentials")
+            #return HttpResponse("Invalid login credentials")
+            return render(request, 'TimeMoneyApp/invalid_login.html', {})
     else:
         return render(request, 'TimeMoneyApp/user_login.html', {})
 
