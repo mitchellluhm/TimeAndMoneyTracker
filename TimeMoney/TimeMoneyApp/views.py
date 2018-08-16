@@ -97,6 +97,9 @@ def time_event(request):
         '''
         form_end = TimeEventEndForm(request.POST, instance=last_event)
         if form_end.is_valid():
+            # print('Form by_id: ' + str(form_end['by_id'].value()))
+            new_inst = TimeEvent.objects.get(id=form_end['by_id'].value())
+            form_end = TimeEventEndForm(request.POST, instance=new_inst)
             form_save = form_end.save(commit=False)
             #form_save.user = request.user
             #form.save(commit=True)
