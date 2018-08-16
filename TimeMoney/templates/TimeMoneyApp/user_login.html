@@ -2,6 +2,10 @@
 {% block login_block %}
 <div class="text-center">
 
+	<!-- TODO fix this hardcode break -->
+	<br>
+	<br>
+
 	<form class="form-signin" action="{% url 'TimeMoneyApp:user_login' %}" method="POST">
 		{% csrf_token %}
       	<h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
