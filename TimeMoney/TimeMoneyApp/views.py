@@ -75,6 +75,7 @@ def time_event(request):
 
     form = TimeEventForm()
     last_event = TimeEvent.objects.order_by('event_start').last()
+    print(last_event.get_event_duration())
     form_end = TimeEventEndForm(instance=last_event)
 
     if request.method == 'POST':

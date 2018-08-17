@@ -20,6 +20,7 @@
 				<th>Event Type</th>
 				<th>Event Start</th>
 				<th>Event End</th>
+				<th>Event Duration</th>
 		</thead>
 
 		{% for user_event in user_event_list %}
@@ -30,6 +31,7 @@
 				<td>{{ user_event.event_type }}</td>
 				<td>{{ user_event.event_start }}</td>
 				<td>{{ user_event.event_end }}</td>
+				<td>{{ user_event.get_event_duration }}</td>
 		</tr>
 
 		{% endfor %}

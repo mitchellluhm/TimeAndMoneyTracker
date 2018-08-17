@@ -25,5 +25,15 @@ class TimeEvent(models.Model):
         return "Some Time Event"
 
     # TODO : compute length of event with methods
+    def get_event_duration(self):
+
+        if self.event_end:
+            diff = self.event_end - self.event_start
+            #return diff.total_seconds()
+        else:
+            now = datetime.datetime.utcnow().replace(tzinfo=utc)
+            diff = now - self.event_start
+            #return -1.0
+        return str(diff / 60.0)
 
 # TODO : add MoneyEvent
