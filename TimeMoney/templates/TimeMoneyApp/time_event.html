@@ -1,6 +1,9 @@
 {% extends 'TimeMoneyApp/base.html' %}
-
 {% block login_block %}
+
+<br>
+<br>
+<br>
 
 <h1>Manage Events Here</h1>
 
@@ -39,18 +42,37 @@
 
 {% endif %}
 
-<!-- Have option to close out one of these -->
-<form method="POST">
-	{{ form.as_p }}
-	{% csrf_token %}
-	<input type="submit" value="Submit">
-</form>
+<br>
 
-<form method="POST">
-	{{ form_end.as_p }}
-	{% csrf_token %}
-	<input type="submit" value="Submit End">
-</form>
+<!-- Have option to close out one of these -->
+<div class="row">
+
+   <div class="col-md-4">
+
+		<h5>Create a New Event:</h5>
+
+		<form method="POST">
+			{{ form.as_p }}
+			{% csrf_token %}
+			<input type="submit" value="Submit">
+		</form>
+
+   </div>
+
+   <div class="col-md-4">
+
+		<h5>End an Event:</h5>
+
+		<form method="POST">
+			{{ form_end.as_p }}
+			{% csrf_token %}
+			<input type="submit" value="Submit End">
+		</form>
+
+   </div>
+
+</div>
+
 
 <!-- Start New Event -->
 
