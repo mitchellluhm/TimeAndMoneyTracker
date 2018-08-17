@@ -1,15 +1,12 @@
 {% extends 'TimeMoneyApp/base.html' %}
 {% block register_block %}
-<!--
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Users Page</title>
-  </head>
-  <body>
--->
- 	<h1>Sign Up Now</h1>
+<div class="text-center">
+
+	<br>
+	<br>
+	<br>
+
+	<h1>Sign Up Now</h1>
 
 	<form method="POST">
 		{{ user_form.as_p }}
@@ -18,8 +15,6 @@
 		<input type="submit" value="Submit">
 	</form>
 
-<!--
-  </body>
-</html>
--->
+</div>
+
 {% endblock %}
