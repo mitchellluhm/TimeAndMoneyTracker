@@ -91,11 +91,6 @@ def time_event(request):
             print("Some Form Error in time_event")
 
         # Check second form
-        '''
-        Currently, it will only save to the most recent instance of a time_event
-        It will fill it in from None to something
-        Or overwrite something with the new time
-        '''
         form_end = TimeEventEndForm(request.POST, instance=last_event)
         if form_end.is_valid():
             # print('Form by_id: ' + str(form_end['by_id'].value()))
@@ -114,3 +109,9 @@ def time_event(request):
                     'form_end' : form_end,
                     'user_event_list' : user_event_list,
                   })
+
+@login_required
+def time_event_visualize(request):
+    user_event_list = TimeEvent.objects.filter(user=request.user)
+    return render(request, 'TimeMoneyApp/time_event_visualize.html',
+                  { 'user_event_list' : user_event_list, })

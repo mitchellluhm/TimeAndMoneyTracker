@@ -1,5 +1,5 @@
 {% extends 'TimeMoneyApp/base.html' %}
-{% block login_block %}
+{% block time_event_vis_block %}
 
 <br>
 <br>
@@ -43,48 +43,5 @@
 <p>No User Events Found</p>
 
 {% endif %}
-
-<br>
-
-<!-- Have option to close out one of these -->
-<div class="row">
-
-   <div class="col-md-4">
-
-		<h5>Create a New Event:</h5>
-
-		<form method="POST">
-			{{ form.as_p }}
-			{% csrf_token %}
-			<input type="submit" value="Submit">
-		</form>
-
-   </div>
-
-   <div class="col-md-4">
-
-		<h5>End an Event:</h5>
-
-		<form method="POST">
-			{{ form_end.as_p }}
-			{% csrf_token %}
-			<input type="submit" value="Submit End">
-		</form>
-
-   </div>
-
-   <div class="col-md-4">
-
-		<h5>Visualize The Data</h5>
-
-		<a href="{% url 'TimeMoneyApp:time_event_visualize' %}">Start Visualization</a>
-
-
-   </div>
-
-</div>
-
-
-<!-- Start New Event -->
 
 {% endblock %}
