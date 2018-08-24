@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+import datetime
+import time
 
 # Create your views here.
 def index(request):
@@ -113,5 +115,18 @@ def time_event(request):
 @login_required
 def time_event_visualize(request):
     user_event_list = TimeEvent.objects.filter(user=request.user)
+    for ue in user_event_list:
+        time_str = ue.get_event_duration()
+        time_str = time_str.split('.')[0]
+        time_splt = time.strptime(time_str.split(',')[0],'%H:%M:%S')
+        secs = datetime.timedelta(hours=time_splt.tm_hour,
+                                  minutes=time_splt.tm_min,
+                                  seconds=time_splt.tm_sec).total_seconds()
+        mins = secs / 60.0
+        print(mins)
+
+        ''' TODO MAKE DATA STRUCT WITH MINS AND DATES '''
+        ''' SEND THAT TO GRAPH MAKER '''
+
     return render(request, 'TimeMoneyApp/time_event_visualize.html',
                   { 'user_event_list' : user_event_list, })
