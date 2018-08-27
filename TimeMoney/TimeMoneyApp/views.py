@@ -122,6 +122,8 @@ def time_event_visualize(request):
     user_event_list = TimeEvent.objects.filter(user=request.user)
 
     eventX_durationY = {}
+    events_durs = []
+    ns = []
     n = 0
 
     for ue in user_event_list:
@@ -132,19 +134,23 @@ def time_event_visualize(request):
                                   minutes=time_splt.tm_min,
                                   seconds=time_splt.tm_sec).total_seconds()
         mins = secs / 60.0
-        eventX_durationY[n] = mins
-        print(eventX_durationY[n])
-        d = pd.Series(data=eventX_durationY)
+        eventX_durationY[str(n)] = mins
+        events_durs.append(mins)
+        ns.append(n)
 
-        p = sns.barplot(d)
-        f = p.get_figure()
-        f.savefig('hi.png')
-        
+        #print(eventX_durationY[n])
 
         ''' TODO MAKE DATA STRUCT WITH MINS AND DATES '''
         ''' SEND THAT TO GRAPH MAKER '''
 
         n += 1
+
+
+    df_dict = {"event" : ns, "duration" : events_durs}
+    df = pd.DataFrame(df_dict)
+    p = sns.barplot(data=df, x="event", y="duration")
+    f = p.get_figure()
+    f.savefig('hi.png')
 
     return render(request, 'TimeMoneyApp/time_event_visualize.html',
                   { 'user_event_list' : user_event_list, })
