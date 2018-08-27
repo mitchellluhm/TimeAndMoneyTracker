@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import django.utils
+import datetime
 # Create your models here.
 
 class UserProfileInfo(models.Model):
@@ -31,9 +32,11 @@ class TimeEvent(models.Model):
             diff = self.event_end - self.event_start
             #return diff.total_seconds()
         else:
-            now = datetime.datetime.utcnow().replace(tzinfo=utc)
-            diff = now - self.event_start
+            #now = datetime.datetime.utcnow().replace(tzinfo='US/Eastern') 
+            #diff = now - self.event_start
             #return -1.0
+            diff = 60.0
+            return "Ongoing"
         return str(diff / 60.0)
 
 # TODO : add MoneyEvent
