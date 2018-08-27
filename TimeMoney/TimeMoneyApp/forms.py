@@ -42,3 +42,22 @@ class TimeEventEndForm(forms.ModelForm):
     class Meta():
         model = TimeEvent
         fields = ('by_id', 'event_end',)
+
+# TODO : visualize form, select how to visulize their data
+class VisualizeForm(forms.Form):
+    chart = forms.MultipleChoiceField(choices=[('Barplot', 'Barplot')])
+    group = forms.MultipleChoiceField(choices=[('Date', 'Date'), ('Day of Week', 'Day of Week'), ('None', 'None')])
+
+'''
+    1) Select Date Range
+
+        Default: ALL
+        Show min and max dates
+
+    2) Select Group
+
+        Options: None (events separate)
+                 Day (group events of same day)
+                 Day of Week (group events of same day of week)
+'''
+

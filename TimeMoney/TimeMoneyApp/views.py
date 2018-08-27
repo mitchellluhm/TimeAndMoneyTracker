@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from TimeMoneyApp.forms import NewUserForm, UserProfileInfoForm, TimeEventForm, TimeEventEndForm
+from TimeMoneyApp.forms import NewUserForm, UserProfileInfoForm, TimeEventForm, TimeEventEndForm, VisualizeForm
 from TimeMoneyApp.models import TimeEvent
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -119,6 +119,9 @@ def time_event_visualize(request):
     import matplotlib.pyplot as plt
     import seaborn as sns
 
+    vis_form = VisualizeForm()
+
+    # get all events of the signed in user
     user_event_list = TimeEvent.objects.filter(user=request.user)
 
     eventX_durationY = {}
@@ -126,6 +129,9 @@ def time_event_visualize(request):
     ns = []
     n = 0
 
+    # TODO : inject visualiztion form
+
+    # process events
     for ue in user_event_list:
         time_str = ue.get_event_duration()
         time_str = time_str.split('.')[0]
@@ -146,11 +152,16 @@ def time_event_visualize(request):
         n += 1
 
 
+    # convert to pandas Data Frame
     df_dict = {"event" : ns, "duration" : events_durs}
     df = pd.DataFrame(df_dict)
+
+    # graph and save
     p = sns.barplot(data=df, x="event", y="duration")
     f = p.get_figure()
+    # TODO : permission error saving to /media/...
     f.savefig('hi.png')
 
     return render(request, 'TimeMoneyApp/time_event_visualize.html',
-                  { 'user_event_list' : user_event_list, })
+                  { 'user_event_list' : user_event_list,
+                    'vis_form' : vis_form, })

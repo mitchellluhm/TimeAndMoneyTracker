@@ -55,4 +55,10 @@
 
 {% endif %}
 
+<form method="POST">
+		{{ vis_form.as_p }}
+		{% csrf_token %}
+		<input type="submit" value="Submit">
+</form>
+
 {% endblock %}
