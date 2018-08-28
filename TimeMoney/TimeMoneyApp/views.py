@@ -123,6 +123,8 @@ def time_event_visualize(request):
     # declare the form
     vis_form = VisualizeForm()
 
+    image_exist = False
+
     # see if form submitted
     if request.method == 'POST':
         vis_form = VisualizeForm(request.POST)
@@ -152,11 +154,15 @@ def time_event_visualize(request):
             p.set_title('Event Summary')
             f = p.get_figure()
             # TODO : permission error saving to /media/...
-            f.savefig('hi3.png')
+            f.savefig('media/hi3.png')
+
+            image_exist = True
 
     ''' remove '''
     user_event_list = TimeEvent.objects.filter(user=request.user)
 
     return render(request, 'TimeMoneyApp/time_event_visualize.html',
                   { 'user_event_list' : user_event_list,
-                    'vis_form' : vis_form, })
+                    'vis_form' : vis_form,
+                    'pic': 'media/hi3.png',
+                  })
