@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import datetime
 import time
+from . import event_processor as EP
 
 # Create your views here.
 def index(request):
@@ -119,48 +120,37 @@ def time_event_visualize(request):
     import matplotlib.pyplot as plt
     import seaborn as sns
 
+    # declare the form
     vis_form = VisualizeForm()
 
-    # get all events of the signed in user
+    # see if form submitted
+    if request.method == 'POST':
+        vis_form = VisualizeForm(request.POST)
+
+        if vis_form.is_valid():
+
+            # do something with the data
+
+            # fetch relevant events
+            user_event_list = TimeEvent.objects.filter(user=request.user)
+
+            # create selected chart
+            mins_n = EP.create_min_list(user_event_list)
+
+            # convert to pandas Data Frame
+            df_dict = {"event" : mins_n[1], "duration" : mins_n[0]}
+            df = pd.DataFrame(df_dict)
+
+            # graph and save
+            p = sns.barplot(data=df, x="event", y="duration")
+            p.set_xlabel('Event Number')
+            p.set_ylabel('Duration (Minutes)')
+            p.set_title('Event Summary')
+            f = p.get_figure()
+            # TODO : permission error saving to /media/...
+            f.savefig('hi2.png')
+
     user_event_list = TimeEvent.objects.filter(user=request.user)
-
-    eventX_durationY = {}
-    events_durs = []
-    ns = []
-    n = 0
-
-    # TODO : inject visualiztion form
-
-    # process events
-    for ue in user_event_list:
-        time_str = ue.get_event_duration()
-        time_str = time_str.split('.')[0]
-        time_splt = time.strptime(time_str.split(',')[0],'%H:%M:%S')
-        secs = datetime.timedelta(hours=time_splt.tm_hour,
-                                  minutes=time_splt.tm_min,
-                                  seconds=time_splt.tm_sec).total_seconds()
-        mins = secs / 60.0
-        eventX_durationY[str(n)] = mins
-        events_durs.append(mins)
-        ns.append(n)
-
-        #print(eventX_durationY[n])
-
-        ''' TODO MAKE DATA STRUCT WITH MINS AND DATES '''
-        ''' SEND THAT TO GRAPH MAKER '''
-
-        n += 1
-
-
-    # convert to pandas Data Frame
-    df_dict = {"event" : ns, "duration" : events_durs}
-    df = pd.DataFrame(df_dict)
-
-    # graph and save
-    p = sns.barplot(data=df, x="event", y="duration")
-    f = p.get_figure()
-    # TODO : permission error saving to /media/...
-    f.savefig('hi.png')
 
     return render(request, 'TimeMoneyApp/time_event_visualize.html',
                   { 'user_event_list' : user_event_list,
