@@ -3,6 +3,10 @@ import datetime
 import time
 
 def create_min_list(events):
+    ''' TODO:
+        have ns be name of the event,
+        color hue with event type,
+    '''
 
     event_durations = []
     ns = []
@@ -22,3 +26,16 @@ def create_min_list(events):
         n += 1
 
     return (event_durations, ns)
+
+def fetch_events(events, group):
+
+    if group == 'Date':
+        # organize events by date
+        return ([],[])
+    elif group == 'Day':
+        # organize events by day of week
+        return ([],[])
+    else:
+        # no organization
+        return create_min_list(events)
+

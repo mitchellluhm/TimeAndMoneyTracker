@@ -130,12 +130,16 @@ def time_event_visualize(request):
         if vis_form.is_valid():
 
             # do something with the data
+            chart_kind = vis_form.cleaned_data['chart'][0]
+            group_kind = vis_form.cleaned_data['group'][0]
+
 
             # fetch relevant events
             user_event_list = TimeEvent.objects.filter(user=request.user)
 
             # create selected chart
-            mins_n = EP.create_min_list(user_event_list)
+            #mins_n = EP.create_min_list(user_event_list)
+            mins_n = EP.fetch_events(user_event_list, group_kind)
 
             # convert to pandas Data Frame
             df_dict = {"event" : mins_n[1], "duration" : mins_n[0]}
@@ -148,8 +152,9 @@ def time_event_visualize(request):
             p.set_title('Event Summary')
             f = p.get_figure()
             # TODO : permission error saving to /media/...
-            f.savefig('hi2.png')
+            f.savefig('hi3.png')
 
+    ''' remove '''
     user_event_list = TimeEvent.objects.filter(user=request.user)
 
     return render(request, 'TimeMoneyApp/time_event_visualize.html',
